@@ -8,8 +8,8 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       # session helperのlog_in(user)を呼びだし
       log_in user
-      # user_url(user)と同義
-      redirect_to user
+      # session helperの呼び出し（記憶しているURL (もしくはデフォルト値) にリダイレクトする）
+      redirect_back_or user
     else
       # エラーメッセージ用のflashを入れる
       flash.now[:danger] = 'メールアドレスとパスワードの情報が一致しませんでした。'
